@@ -107,7 +107,7 @@ public class GameController : GameBaseController
                 var notUsedPlayerController = GameObject.FindGameObjectWithTag("P" + notUsedId + "-controller");
                 if (notUsedPlayerController != null)
                 {
-                    var notUsedMoveController = notUsedPlayerController.GetComponent<CharacterMoveController>();
+                    var notUsedMoveController = notUsedPlayerController.GetComponent<CharacterController>();
                     notUsedMoveController.TriggerActive(false);
                 }
                    // notUsedPlayerController.SetActive(false);
@@ -187,7 +187,7 @@ public class GameController : GameBaseController
         {
             if (this.playerControllers[i] != null)
             {
-                this.playerControllers[i].characterStatus = CharacterStatus.nextQA;
+                this.playerControllers[i].IsTriggerToNextQuestion = true;
             }
         }
     }

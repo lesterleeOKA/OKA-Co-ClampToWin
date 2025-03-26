@@ -2,28 +2,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
-using Unity.VisualScripting;
-using System;
 
-public class CharacterMoveController : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     public EventTrigger eventTrigger;
+    public delegate void PointerClickDelegate(BaseEventData data);
     public delegate void PointerDownDelegate(BaseEventData data);
     public delegate void PointerUpDelegate(BaseEventData data);
-    //public delegate void PointerClickDelegate(BaseEventData data);
-    //public event PointerClickDelegate OnPointerClickEvent;
+    public event PointerClickDelegate OnPointerClickEvent;
     public event PointerDownDelegate OnPointerDownEvent;
     public event PointerUpDelegate OnPointerUpEvent;
     public bool startReset = false;
     public float idleTimeReset = 10f;
     public float idleCount = 0f;
+    public PlayerController playerController;
 
     void Start()
     {
         // Add a pointer click event
-        //AddEventTrigger(eventTrigger, EventTriggerType.PointerClick, OnPointerClick);
-        AddEventTrigger(eventTrigger, EventTriggerType.PointerDown, OnPointerDown);
-        AddEventTrigger(eventTrigger, EventTriggerType.PointerUp, OnPointerUp);
+        AddEventTrigger(eventTrigger, EventTriggerType.PointerClick, OnPointerClick);
+        //AddEventTrigger(eventTrigger, EventTriggerType.PointerDown, OnPointerDown);
+        //AddEventTrigger(eventTrigger, EventTriggerType.PointerUp, OnPointerUp);
     }
 
     private void Update()
@@ -55,12 +54,11 @@ public class CharacterMoveController : MonoBehaviour
     }
 
     // Callback function for pointer click event
-    /*void OnPointerClick(BaseEventData data)
+    void OnPointerClick(BaseEventData data)
     {
         //Debug.Log("Pointer Clicked!");
-        // Invoke the event to call the function from Player class
         OnPointerClickEvent?.Invoke(data);
-    }*/
+    }
 
     void OnPointerDown(BaseEventData data)
     {
