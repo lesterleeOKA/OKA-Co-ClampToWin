@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clamp : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Clamp : MonoBehaviour
     public Cell cell;
     public CanvasGroup answerBoxCg;
     private TextMeshProUGUI answerBox = null;
+    public Sprite[] clampSprites;
 
     private void Start()
     {
@@ -28,10 +30,34 @@ public class Clamp : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        switch (this.clampStatus)
+        {
+            case ClampStatus.open:
+                this.setClampSprite(0);
+                break;
+            case ClampStatus.clamped:
+            case ClampStatus.getWord:
+            case ClampStatus.outScreen:
+                this.setClampSprite(1);
+                break;
+        }
+    }
+
     public void resetClamp()
     {
         this.setAnswer(null);
         this.clampStatus = ClampStatus.open;
+    }
+
+    void setClampSprite(int id)
+    {
+        var clampImg = this.transform.GetComponent<Image>();
+        if(clampImg != null)
+        {
+            clampImg.sprite = this.clampSprites[id];
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -41,11 +67,10 @@ public class Clamp : MonoBehaviour
             var cell = other.GetComponent<Cell>();
             if (cell != null)
             {
-                /// trigger player collide word;
                 cell.setCellEnterColor(true, GameController.Instance.showCells);
-                if (cell.isSelected && this.clampStatus == Clamp.ClampStatus.open)
+                if (cell.isSelected && this.clampStatus == ClampStatus.open)
                 {
-                    this.clampStatus = Clamp.ClampStatus.clamped;
+                    this.clampStatus = ClampStatus.clamped;
                     this.setAnswer(cell);
                 }
             }

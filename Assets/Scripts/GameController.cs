@@ -5,6 +5,7 @@ using TMPro;
 public class GameController : GameBaseController
 {
     public static GameController Instance = null;
+    public GameMode gameMode = GameMode.Coplayer_2;
     public CharacterSet[] characterSets;
     public GridManager gridManager;
     public Cell[,] grid;
@@ -15,6 +16,14 @@ public class GameController : GameBaseController
     public bool showCells = false;
     public CanvasGroup[] audioTypeButtons, fillInBlankTypeButtons;
     public TextMeshProUGUI choiceText;
+
+    public enum GameMode
+    {
+        SinglePlayer,
+        Battle,
+        Coplayer_2,
+        Coplayer_4
+    }
 
     protected override void Awake()
     {
@@ -180,6 +189,43 @@ public class GameController : GameBaseController
         }
     }
 
+    public void checkAnswerResult(int _triggerPlayerId=-1, Clamp playerClamp = null)
+    {
+        switch (this.gameMode)
+        {
+            case GameMode.SinglePlayer:
+                break;
+            case GameMode.Battle:
+                break;
+            case GameMode.Coplayer_2:
+                for (int i = 0; i < this.playerNumber; i++)
+                {
+                    if (this.playerControllers[i] != null)
+                    {
+                        if ((_triggerPlayerId == 0 || _triggerPlayerId == 1) && (i == 0 || i == 1))
+                        {
+                            // Pair 1: Player 0 and Player 1
+                            LogController.Instance?.debug($"Players {i} get scores");
+                            this.playerControllers[i].answer = playerClamp.answer;
+                            this.playerControllers[i].collectedCell.Add(playerClamp.cell);
+                            this.playerControllers[i].finishedAction();
+                        }
+                        else if ((_triggerPlayerId == 2 || _triggerPlayerId == 3) && (i == 2 || i == 3))
+                        {
+                            // Pair 2: Player 2 and Player 3
+                            LogController.Instance?.debug($"Players {i} get scores");
+                            this.playerControllers[i].answer = playerClamp.answer;
+                            this.playerControllers[i].collectedCell.Add(playerClamp.cell);
+                            this.playerControllers[i].finishedAction();
+                        }
+                    }
+                }
+                break;
+            case GameMode.Coplayer_4:
+                break;
+        }
+    }
+
     public void PrepareNextQuestion()
     {
         LogController.Instance?.debug("Prepare Next Question");
@@ -188,6 +234,7 @@ public class GameController : GameBaseController
             if (this.playerControllers[i] != null)
             {
                 this.playerControllers[i].IsTriggerToNextQuestion = true;
+                this.playerControllers[i].characterButton.TriggerActive(false);
             }
         }
     }
@@ -227,16 +274,14 @@ public class GameController : GameBaseController
             if (this.playerControllers[i] != null)
             {
                 var cellVector2 = cellPositions[characterPositionList[i]];
-                Vector3 actualCellPosition = this.gridManager.cells[cellVector2.x, cellVector2.y].transform.localPosition;
                 this.gridManager.cells[cellVector2.x, cellVector2.y].setCellEnterColor(true);
                 this.playerControllers[i].resetRetryTime();
                 this.playerControllers[i].collectedCell.Clear();
-                this.playerControllers[i].playerReset(actualCellPosition);
+                this.playerControllers[i].playerReset();
             }
         }
     }
    
-    
     private void Update()
     {
         if(!this.playing) return;
@@ -254,84 +299,6 @@ public class GameController : GameBaseController
         {
             this.UpdateNextQuestion();
         }
-
-        /*if (this.playerControllers.Count == 0) return;
-
-        for (int j = 0; j < SortOrderController.Instance.roads.Length; j++)
-        {
-            var road = SortOrderController.Instance.roads[j];
-            road.showRoadHint(false);
-            for (int i = 0; i < this.playerNumber; i++)
-            {
-                var characterCanvas = this.playerControllers[i].characterCanvas;
-                if (characterCanvas.sortingOrder == road.orderLayer && this.showCells)
-                {
-                    road.showRoadHint(true);
-                }
-            }  
-        }
-
-       // bool anyPlayerReachToSubmitPoint = false;
-
-        for (int i = 0; i < this.playerNumber; i++)
-        {
-            if (this.playerControllers[i] != null)
-            {
-                var player = this.playerControllers[i];
-                switch (player.stayTrail)
-                {
-                    case StayTrail.submitPoint:
-                        if (player.Retry > 0 && !this.showingPopup)
-                        {
-                            int currentTime = Mathf.FloorToInt(((this.gameTimer.gameDuration - this.gameTimer.currentTime) / this.gameTimer.gameDuration) * 100);
-                            this.playerControllers[i].checkAnswer(currentTime, () =>
-                            {
-                                for (int i = 0; i < this.playerNumber; i++)
-                                {
-                                    if (this.playerControllers[i] != null)
-                                    {
-                                        this.playerControllers[i].playerReset();
-                                    }
-                                }
-                            });
-                        }
-                        break;
-                    case StayTrail.startPoints:
-                        player.autoDeductAnswer();
-                        break;
-                }
-            }
-        }
-
-        bool isBattleMode = this.playerNumber > 1;
-
-        if (isBattleMode)
-        {
-            bool isNextQuestion = true;
-
-            for (int i = 0; i < this.playerNumber; i++)
-            {
-                if (this.playerControllers[i] == null || !this.playerControllers[i].IsTriggerToNextQuestion)
-                {
-                    isNextQuestion = false;
-                    break;
-                }
-            }
-
-            if (isNextQuestion)
-            {
-                this.UpdateNextQuestion();
-            }
-        }
-        else
-        {
-            if (this.playerControllers[0] != null && this.playerControllers[0].IsTriggerToNextQuestion)
-            {
-                this.UpdateNextQuestion();
-            }
-        }
-        */
-
     } 
 }
 

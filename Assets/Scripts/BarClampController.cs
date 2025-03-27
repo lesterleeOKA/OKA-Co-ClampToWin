@@ -7,8 +7,7 @@ public class BarClampAnimation : MonoBehaviour
     public enum BarClampStatus
     {
         rotating,
-        extending,
-        clamped
+        extending
     }
     public CharacterController characterController;
     private PlayerController playerController = null;
@@ -50,55 +49,77 @@ public class BarClampAnimation : MonoBehaviour
         switch (this.barClampStatus)
         {
             case BarClampStatus.rotating:
-                this.StartRotation();
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    this.barClampStatus = BarClampStatus.extending;
-                }
+                this.HandleRotatingState();
                 break;
             case BarClampStatus.extending:
-                if (this.isFilling)
-                {
-                    
-                    this.targetFill += this.fillSpeed * Time.deltaTime;
-                    if (this.targetFill >= 1f || 
-                        this.clamp.clampStatus == Clamp.ClampStatus.outScreen ||
-                        this.clamp.clampStatus == Clamp.ClampStatus.getWord)
-                    {
-                        this.isFilling = false;
-                    }
-                }
-                else
-                {
-                    this.targetFill -= this.fillSpeed * Time.deltaTime;
-                    if (this.targetFill <= this.startingFill)
-                    {
-                        if(this.clamp.clampStatus == Clamp.ClampStatus.getWord)
-                        {
-                            if (this.characterController != null)
-                            {
-                                this.playerController = this.characterController.playerController;
-                                this.playerController.answer = this.clamp.answer;
-                                this.playerController.collectedCell.Add(this.clamp.cell);
-                                var gameTimer = GameController.Instance.gameTimer;
-                                int currentTime = Mathf.FloorToInt(((gameTimer.gameDuration - gameTimer.currentTime) / gameTimer.gameDuration) * 100);
-                                this.playerController.checkAnswer(currentTime);
-                            }
-                        }
-                        this.targetFill = this.startingFill;
-                        this.isFilling = true;
-                        this.clamp.resetClamp();
-                        this.barClampStatus = BarClampStatus.rotating;
-                        this.characterController.TriggerActive(true);
-                    }
-                }
-
-                this.bar.fillAmount = targetFill;
-                this.UpdateClampPosition();
-                break;
-            case BarClampStatus.clamped:
+                this.HandleExtendingState();
                 break;
         }
+    }
+
+    private void HandleRotatingState()
+    {
+        this.StartRotation();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.barClampStatus = BarClampStatus.extending;
+        }
+    }
+
+    private void HandleExtendingState()
+    {
+        if (this.isFilling)
+        {
+            this.UpdateFillAmount();
+        }
+        else
+        {
+            this.DecreaseFillAmount();
+        }
+
+        this.bar.fillAmount = targetFill;
+        this.UpdateClampPosition();
+    }
+
+    private void UpdateFillAmount()
+    {
+        this.targetFill += this.fillSpeed * Time.deltaTime;
+        if (this.targetFill >= 1f)
+        {
+            this.clamp.clampStatus = Clamp.ClampStatus.clamped;
+            this.isFilling = false;
+        }
+        else if (this.clamp.clampStatus == Clamp.ClampStatus.outScreen ||
+                 this.clamp.clampStatus == Clamp.ClampStatus.getWord)
+        {
+            this.isFilling = false;
+        }
+    }
+
+    private void DecreaseFillAmount()
+    {
+        this.targetFill -= this.fillSpeed * Time.deltaTime;
+        if (this.targetFill <= this.startingFill)
+        {
+            ProcessClampReset();
+        }
+    }
+
+    private void ProcessClampReset()
+    {
+        if (this.characterController == null)
+            return;
+        this.playerController = this.characterController.playerController;
+        if (this.clamp.clampStatus == Clamp.ClampStatus.getWord)
+        {
+            GameController.Instance.checkAnswerResult(this.playerController.UserId, this.clamp);
+        }
+        this.targetFill = this.startingFill;
+        this.isFilling = true;
+        this.clamp.resetClamp();
+        this.barClampStatus = BarClampStatus.rotating;
+        if(!this.playerController.IsTriggerToNextQuestion)
+            this.characterController.TriggerActive(true);
     }
 
     public void StartClamp(BaseEventData data)

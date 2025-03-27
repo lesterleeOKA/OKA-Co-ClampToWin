@@ -220,6 +220,19 @@ public class PlayerController : UserData
         }
     }
 
+    public void finishedAction()
+    {
+        LogController.Instance.debug("finished question!!!!!!!!!!!!!!!!!!!!!!");
+        int currentTime = this.GetCurrentTimePercentage();
+        this.checkAnswer(currentTime);
+    }
+
+    private int GetCurrentTimePercentage()
+    {
+        var gameTimer = GameController.Instance.gameTimer;
+        return Mathf.FloorToInt(((gameTimer.gameDuration - gameTimer.currentTime) / gameTimer.gameDuration) * 100);
+    }
+
     public void resetRetryTime()
     {
         this.scoring.resetText();
@@ -244,15 +257,15 @@ public class PlayerController : UserData
         }
         else
         {
-            GameController.Instance?.setWrongPopup(true);
+            //GameController.Instance?.setWrongPopup(true);
             AudioController.Instance?.PlayAudio(2);
-            this.updateRetryTimes(true);
-            yield return new WaitForSeconds(delay);
-            GameController.Instance?.setWrongPopup(false);
-            if (this.Retry <= 0)
+            //this.updateRetryTimes(true);
+            //yield return new WaitForSeconds(delay);
+           //GameController.Instance?.setWrongPopup(false);
+            /*if (this.Retry <= 0)
             {
                 this.IsTriggerToNextQuestion = true;
-            }
+            }*/
             onFailureCompleted?.Invoke();
         }
         this.scoring.correct = false;
@@ -265,13 +278,14 @@ public class PlayerController : UserData
     }
 
 
-    public void playerReset(Vector3 newStartPostion)
+    public void playerReset()
     {             
         this.answer = "";
         this.IsCheckedAnswer = false;
         this.IsCorrect = false;
         this.resetCount = 2.0f;
         this.collectedCell.Clear();
+        this.characterButton.TriggerActive(true);
     }
     
     public void autoDeductAnswer()
@@ -291,106 +305,6 @@ public class PlayerController : UserData
         {
             this.countAtStartPoints = this.countGetAnswerAtStartPoints;
         }
-    }
-
-    
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        // Check if the other collider has a specific tag, e.g., "Player"
-        if (other.CompareTag("Word"))
-        {
-            var cell = other.GetComponent<Cell>();
-            if (cell != null)
-            {
-                cell.setCellEnterColor(true, GameController.Instance.showCells);
-                if (cell.isSelected && this.Retry > 0)
-                {
-                    //LogController.Instance.debug("Player has entered the trigger!" + other.name);
-                    AudioController.Instance?.PlayAudio(9);
-
-                    var gridManager = GameController.Instance.gridManager;
-                    if (gridManager.isMCType){
-                        if (this.collectedCell.Count > 0)
-                        {
-                            var latestCell = this.collectedCell[this.collectedCell.Count - 1];
-                            //latestCell.SetTextStatus(true);
-                            gridManager.updateNewWordPosition(latestCell);
-                            this.collectedCell.RemoveAt(this.collectedCell.Count - 1);
-                        }
-                    }
-                    this.setAnswer(cell.content.text);
-                    this.collectedCell.Add(cell);
-                    cell.SetTextStatus(false);
-                    this.characterStatus = CharacterStatus.idling;
-                    var gameTimer = GameController.Instance.gameTimer;
-                    int currentTime = Mathf.FloorToInt(((gameTimer.gameDuration - gameTimer.currentTime) / gameTimer.gameDuration) * 100);
-                    this.checkAnswer(currentTime);
-                }
-            }
-        }
-        else if (other.CompareTag("Wall"))
-        {
-            this.ReBornCharacter();
-        }
-    }
-
-    void StopCharacter()
-    {
-        this.rb.velocity = Vector2.zero;
-        this.rb.angularVelocity = 0f;
-        if(this.characterStatus != CharacterStatus.born) this.characterStatus = CharacterStatus.rotating;
-    }
-
-    void HoldCharacter()
-    {
-        this.rb.velocity = Vector2.zero;
-        this.rb.angularVelocity = 0f;
-    }
-
-    void ReBornCharacter()
-    {
-        if (this.GetComponent<CircleCollider2D>().enabled)
-        {
-            SetUI.SetScale(this.answerBoxCg, false);
-            AudioController.Instance?.PlayAudio(11, false, 0.5f);
-            this.deductAnswer();
-            this.characterStatus = CharacterStatus.recover;
-            this.transform.DOScale(0f, 1f);
-            this.characterButton.TriggerActive(false);
-            this.GetComponent<CircleCollider2D>().enabled = false;
-        }
-    }*/
-
-  /* private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (this.characterStatus == CharacterStatus.moving)
-        {
-            if (this.gameObject.name != collision.gameObject.name)
-            {
-                Rigidbody2D rb = collision.rigidbody;
-                Vector2 relativeVelocity = collision.relativeVelocity;
-
-                // Calculate the distance between the two objects
-                float distance = Vector2.Distance(this.playerCurrentPosition, collision.transform.localPosition);
-
-                var distanceFactor = distance / 10000f;
-                this.reducedFactor = this.reduceBaseFactor + distanceFactor;
-                // Apply the reduced factor
-                collision.gameObject.GetComponent<PlayerController>().reducedFactor = this.reducedFactor;
-                rb.angularVelocity = 0f;
-
-                // Debug log the collision information
-                LogController.Instance.debug($"Collision with: {collision.gameObject.name},distanceFactor: {distanceFactor}, Reduced Factor: {reducedFactor}, Distance: {distance}");
-            }
-            AudioController.Instance?.PlayAudio(10); //blob
-            this.characterStatus = CharacterStatus.idling;
-        }
-    }
-
-
-
-    /*private void OnCollisionExit2D(Collision2D collision)
-    {
-        collision.collider.enabled = true;
-    }*/
+    }    
+   
 }

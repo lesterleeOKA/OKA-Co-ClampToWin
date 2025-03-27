@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1737,7 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3962264, g: 0.3719295, b: 0.3719295, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2553,7 +2553,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &264339625
 CanvasGroup:
@@ -4384,7 +4384,7 @@ MonoBehaviour:
   characterController: {fileID: 2929252283796694924}
   barClampStatus: 0
   bar: {fileID: 639109422}
-  clampOffset: -1500
+  clampOffset: -1530
   clamp: {fileID: 702123780}
   fillSpeed: 0.5
   startingFill: 0.03
@@ -6735,7 +6735,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &536585802
 CanvasGroup:
@@ -7361,7 +7361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3962264, g: 0.3719295, b: 0.3719295, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9012,6 +9012,7 @@ MonoBehaviour:
   startReset: 0
   idleTimeReset: 10
   idleCount: 0
+  playerController: {fileID: 0}
 --- !u!1 &680590071
 GameObject:
   m_ObjectHideFlags: 0
@@ -9867,6 +9868,7 @@ GameObject:
   - component: {fileID: 702123778}
   - component: {fileID: 702123780}
   - component: {fileID: 702123779}
+  - component: {fileID: 702123781}
   m_Layer: 5
   m_Name: Clamp
   m_TagString: Untagged
@@ -9891,8 +9893,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -852}
-  m_SizeDelta: {x: 242, y: 186}
+  m_AnchoredPosition: {x: 0, y: -872}
+  m_SizeDelta: {x: 0, y: 147.56097}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &702123775
 Canvas:
@@ -9937,7 +9939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06d7ad263b771914a84e8036dc487ef2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9987,9 +9989,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 30}
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 70
 --- !u!50 &702123779
 Rigidbody2D:
   serializedVersion: 4
@@ -10033,6 +10035,23 @@ MonoBehaviour:
   answer: 
   cell: {fileID: 0}
   answerBoxCg: {fileID: 264339625}
+  clampSprites:
+  - {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
+  - {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
+--- !u!114 &702123781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702123773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1.64
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -10164,7 +10183,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &716542450
 CanvasGroup:
@@ -11555,7 +11574,7 @@ MonoBehaviour:
   characterController: {fileID: 2929252283971006120}
   barClampStatus: 0
   bar: {fileID: 1435531729}
-  clampOffset: -1500
+  clampOffset: -1530
   clamp: {fileID: 1008190065}
   fillSpeed: 0.5
   startingFill: 0.03
@@ -13296,6 +13315,7 @@ GameObject:
   - component: {fileID: 895457081}
   - component: {fileID: 895457080}
   - component: {fileID: 895457079}
+  - component: {fileID: 895457085}
   m_Layer: 5
   m_Name: Clamp
   m_TagString: Untagged
@@ -13320,8 +13340,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -852}
-  m_SizeDelta: {x: 242, y: 186}
+  m_AnchoredPosition: {x: 0, y: -872}
+  m_SizeDelta: {x: 0, y: 147.56097}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &895457079
 Rigidbody2D:
@@ -13366,6 +13386,9 @@ MonoBehaviour:
   answer: 
   cell: {fileID: 0}
   answerBoxCg: {fileID: 716542450}
+  clampSprites:
+  - {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
+  - {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
 --- !u!58 &895457081
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -13398,9 +13421,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 30}
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 70
 --- !u!223 &895457082
 Canvas:
   m_ObjectHideFlags: 0
@@ -13444,7 +13467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06d7ad263b771914a84e8036dc487ef2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13462,6 +13485,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895457077}
   m_CullTransparentMesh: 1
+--- !u!114 &895457085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895457077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1.64
 --- !u!1 &897182583
 GameObject:
   m_ObjectHideFlags: 0
@@ -13873,7 +13910,7 @@ MonoBehaviour:
   characterController: {fileID: 1034151764}
   barClampStatus: 0
   bar: {fileID: 15275306}
-  clampOffset: -1500
+  clampOffset: -1530
   clamp: {fileID: 2060071794}
   fillSpeed: 0.5
   startingFill: 0.03
@@ -14271,6 +14308,7 @@ GameObject:
   - component: {fileID: 1008190066}
   - component: {fileID: 1008190065}
   - component: {fileID: 1008190064}
+  - component: {fileID: 1008190070}
   m_Layer: 5
   m_Name: Clamp
   m_TagString: Untagged
@@ -14295,8 +14333,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -852}
-  m_SizeDelta: {x: 242, y: 186}
+  m_AnchoredPosition: {x: 0, y: -872}
+  m_SizeDelta: {x: 0, y: 147.56097}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &1008190064
 Rigidbody2D:
@@ -14341,6 +14379,9 @@ MonoBehaviour:
   answer: 
   cell: {fileID: 0}
   answerBoxCg: {fileID: 1202936319}
+  clampSprites:
+  - {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
+  - {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
 --- !u!58 &1008190066
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14373,9 +14414,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 30}
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 70
 --- !u!223 &1008190067
 Canvas:
   m_ObjectHideFlags: 0
@@ -14419,7 +14460,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06d7ad263b771914a84e8036dc487ef2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14437,6 +14478,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008190062}
   m_CullTransparentMesh: 1
+--- !u!114 &1008190070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008190062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1.64
 --- !u!1 &1016754999
 GameObject:
   m_ObjectHideFlags: 0
@@ -14957,6 +15012,7 @@ MonoBehaviour:
   startReset: 0
   idleTimeReset: 10
   idleCount: 0
+  playerController: {fileID: 0}
 --- !u!114 &1036458425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4566231413139682938, guid: 0017e1a7dfbb96e4eb9744e32abb05b8, type: 3}
@@ -16921,7 +16977,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1202936319
 CanvasGroup:
@@ -26881,7 +26937,7 @@ MonoBehaviour:
   characterController: {fileID: 660099864}
   barClampStatus: 0
   bar: {fileID: 532930281}
-  clampOffset: -1500
+  clampOffset: -1530
   clamp: {fileID: 895457080}
   fillSpeed: 0.5
   startingFill: 0.03
@@ -27747,6 +27803,7 @@ MonoBehaviour:
   maxPlayers: 4
   playing: 0
   showingPopup: 0
+  gameMode: 2
   characterSets:
   - name: p1
     playerNumber: 0
@@ -28372,6 +28429,7 @@ GameObject:
   - component: {fileID: 2060071795}
   - component: {fileID: 2060071794}
   - component: {fileID: 2060071793}
+  - component: {fileID: 2060071799}
   m_Layer: 5
   m_Name: Clamp
   m_TagString: Untagged
@@ -28396,8 +28454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -852}
-  m_SizeDelta: {x: 242, y: 186}
+  m_AnchoredPosition: {x: 0, y: -872}
+  m_SizeDelta: {x: 0, y: 147.56097}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &2060071793
 Rigidbody2D:
@@ -28442,6 +28500,9 @@ MonoBehaviour:
   answer: 
   cell: {fileID: 0}
   answerBoxCg: {fileID: 536585802}
+  clampSprites:
+  - {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
+  - {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
 --- !u!58 &2060071795
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -28474,9 +28535,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 30}
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 70
 --- !u!223 &2060071796
 Canvas:
   m_ObjectHideFlags: 0
@@ -28520,7 +28581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 06d7ad263b771914a84e8036dc487ef2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28538,6 +28599,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060071791}
   m_CullTransparentMesh: 1
+--- !u!114 &2060071799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060071791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1.64
 --- !u!1001 &2062122697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29654,6 +29729,7 @@ MonoBehaviour:
   startReset: 0
   idleTimeReset: 10
   idleCount: 0
+  playerController: {fileID: 0}
 --- !u!1 &2929252283971006116
 GameObject:
   m_ObjectHideFlags: 0
@@ -29749,6 +29825,7 @@ MonoBehaviour:
   startReset: 0
   idleTimeReset: 10
   idleCount: 0
+  playerController: {fileID: 0}
 --- !u!114 &2929252284190108320
 MonoBehaviour:
   m_ObjectHideFlags: 0
