@@ -30,11 +30,11 @@ public class LoaderConfig : GameSetting
 
     public void LoadGameData()
     {
-        RegisterCustomHandler("mSpeed", (value) =>
+        RegisterCustomHandler("cSpeed", (value) =>
         {
-            float playerMovingSpeed = float.Parse(value);
-            this.gameSetup.playersMovingSpeed = playerMovingSpeed;
-            LogController.Instance?.debug("Player moving speed: " + this.gameSetup.playersMovingSpeed);
+            float playersClampSpeed = float.Parse(value);
+            this.gameSetup.playersClampSpeed = playersClampSpeed;
+            LogController.Instance?.debug("Player clamp speed: " + this.gameSetup.playersClampSpeed);
         });
 
         RegisterCustomHandler("rSpeed", (value) =>

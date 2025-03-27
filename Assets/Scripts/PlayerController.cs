@@ -15,7 +15,8 @@ public class PlayerController : UserData
     public bool IsTriggerToNextQuestion = false;
     public bool IsCheckedAnswer = false;
     public Image answerBoxFrame;
-    public float speed;
+    public float playersClampSpeed;
+    public float rotationSpeed;
     [HideInInspector]
     public Transform characterTransform;
     [HideInInspector]
@@ -32,15 +33,15 @@ public class PlayerController : UserData
 
     public void Init(CharacterSet characterSet = null, Sprite[] defaultAnswerBoxes = null, Vector3 startPos = default)
     {
-        /*if(LoaderConfig.Instance.gameSetup.playersMovingSpeed > 0f)
+        if(LoaderConfig.Instance.gameSetup.playersClampSpeed > 0f) 
         {
-            this.moveSpeed = LoaderConfig.Instance.gameSetup.playersMovingSpeed;
+            this.playersClampSpeed = LoaderConfig.Instance.gameSetup.playersClampSpeed;
         }
 
         if(LoaderConfig.Instance.gameSetup.playersRotationSpeed > 0f)
         {
             this.rotationSpeed = LoaderConfig.Instance.gameSetup.playersRotationSpeed;
-        }*/
+        }
     
         this.countAtStartPoints = this.countGetAnswerAtStartPoints;
         this.updateRetryTimes(false);
@@ -53,7 +54,7 @@ public class PlayerController : UserData
         if (this.characterButton == null)
         {
             this.characterButton = GameObject.FindGameObjectWithTag("P" + this.RealUserId + "-controller").GetComponent<CharacterController>();
-            this.characterButton.playerController = this;
+            this.characterButton.Init(this);
         }
 
         if (this.PlayerIcons[0] == null)
@@ -150,7 +151,7 @@ public class PlayerController : UserData
             var loader = LoaderConfig.Instance;
             int eachQAScore = currentQuestion.qa.score.full == 0 ? 10 : currentQuestion.qa.score.full;
             int currentScore = this.Score;
-
+            LogController.Instance?.debug("current answer:"+lowerQIDAns);
             int resultScore = this.scoring.score(this.answer, currentScore, lowerQIDAns, eachQAScore);
             this.Score = resultScore;
             this.IsCorrect = this.scoring.correct;

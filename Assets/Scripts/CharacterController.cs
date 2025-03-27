@@ -16,13 +16,18 @@ public class CharacterController : MonoBehaviour
     public float idleTimeReset = 10f;
     public float idleCount = 0f;
     public PlayerController playerController;
+    public BarClampController barClampController;
 
-    void Start()
+    public void Init(PlayerController _playerController)
     {
+        this.playerController = _playerController;
         // Add a pointer click event
         AddEventTrigger(eventTrigger, EventTriggerType.PointerClick, OnPointerClick);
         //AddEventTrigger(eventTrigger, EventTriggerType.PointerDown, OnPointerDown);
         //AddEventTrigger(eventTrigger, EventTriggerType.PointerUp, OnPointerUp);
+        if(this.barClampController != null) 
+            this.barClampController.Init(this.playerController.playersClampSpeed, 
+                                         this.playerController.rotationSpeed);
     }
 
     private void Update()

@@ -255,8 +255,8 @@ public class GameSetup : LoadImage
     public RawImage gamePreview;
     public InstructionText instructions;
     public float gameTime;
-    public float playersMovingSpeed = 3f;
-    public float playersRotationSpeed = 200f;
+    public float playersClampSpeed = 0.5f;
+    public float playersRotationSpeed = 50f;
     public int retry_times = 3;
     [Range(1, 3)]
     public int objectAverageSpeed;
@@ -289,8 +289,19 @@ public class GameSetup : LoadImage
         if (this.gamePreview == null)
         {
             var preview = GameObject.FindGameObjectWithTag("GamePreview");
-            this.gamePreview = preview != null ? preview.GetComponent<RawImage>() : null;
-            if (preview != null) this.gamePreview.texture = this.previewTexture;
+            
+            if (preview != null) {
+                var aspectRatio = preview.GetComponent<AspectRatioFitter>();
+                this.gamePreview = preview.GetComponent<RawImage>();
+
+                if(this.gamePreview != null) this.gamePreview.texture = this.previewTexture;
+
+                if(aspectRatio != null)
+                {
+                    aspectRatio.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+                    aspectRatio.aspectRatio = (float)this.previewTexture.width / this.previewTexture.height;
+                }
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BarClampAnimation : MonoBehaviour
+public class BarClampController : MonoBehaviour
 {
     public enum BarClampStatus
     {
@@ -24,21 +25,27 @@ public class BarClampAnimation : MonoBehaviour
     public float minRotation = -40f;
     private float currentRotation = 0f;
     private bool rotatingToMax = true;
+    public BoxCollider2D barCollider;
+    private AudioSource audioSource;
 
-    void Start()
+    public void Init(float _fillSpeed=0.5f, float _rotationSpeed=50f)
     {
+        this.fillSpeed = _fillSpeed;
+        this.rotationSpeed = _rotationSpeed;
         this.resetBarClamp();
         this.StartRotation();
         if (this.characterController != null)
         {
             this.characterController.OnPointerClickEvent += this.StartClamp;
         }
+        this.audioSource = this.GetComponent<AudioSource>();
     }
 
     private void resetBarClamp()
     {
         this.barClampStatus = BarClampStatus.rotating;
         this.targetFill = this.startingFill;
+        if(this.clamp != null) this.clamp.resetClamp();
     }
 
     void FixedUpdate()
@@ -78,6 +85,7 @@ public class BarClampAnimation : MonoBehaviour
         }
 
         this.bar.fillAmount = targetFill;
+        this.UpdateColliderSize();
         this.UpdateClampPosition();
     }
 
@@ -90,7 +98,8 @@ public class BarClampAnimation : MonoBehaviour
             this.isFilling = false;
         }
         else if (this.clamp.clampStatus == Clamp.ClampStatus.outScreen ||
-                 this.clamp.clampStatus == Clamp.ClampStatus.getWord)
+                 this.clamp.clampStatus == Clamp.ClampStatus.getWord ||
+                 this.clamp.clampStatus == Clamp.ClampStatus.collidePlayer)
         {
             this.isFilling = false;
         }
@@ -114,6 +123,7 @@ public class BarClampAnimation : MonoBehaviour
         {
             GameController.Instance.checkAnswerResult(this.playerController.UserId, this.clamp);
         }
+        this.SetClampExtendEffect(false);
         this.targetFill = this.startingFill;
         this.isFilling = true;
         this.clamp.resetClamp();
@@ -124,8 +134,36 @@ public class BarClampAnimation : MonoBehaviour
 
     public void StartClamp(BaseEventData data)
     {
+        this.SetClampExtendEffect(true, true, 0.35f);
         this.barClampStatus = BarClampStatus.extending;
         this.characterController.TriggerActive(false);
+    }
+
+    public void SetClampExtendEffect(bool _play = false, bool loop = false, float volume = 1f)
+    {
+        if (!AudioController.Instance.audioStatus)
+            return;
+
+        if (!_play) { 
+            this.audioSource.Stop();
+            return;
+        }
+
+        this.audioSource.volume = volume;
+        this.audioSource.Play();
+        this.audioSource.loop = loop;
+    }
+
+    private void UpdateColliderSize()
+    {
+        if (this.barCollider != null && this.bar != null)
+        {
+            Vector2 barSize = this.bar.rectTransform.rect.size;
+            // Calculate the new width based on the fill amount
+            float newHeight = barSize.y * this.bar.fillAmount;
+            this.barCollider.size = new Vector2(barSize.x, newHeight);
+            this.barCollider.offset = new Vector2(0, -barSize.y / 2 + newHeight / 2);
+        }
     }
 
     private void UpdateClampPosition()

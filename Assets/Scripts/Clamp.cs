@@ -11,6 +11,7 @@ public class Clamp : MonoBehaviour
         open,
         clamped,
         getWord,
+        collidePlayer,
         outScreen,
     }
 
@@ -95,6 +96,16 @@ public class Clamp : MonoBehaviour
                     LogController.Instance.debug("Player has exited the trigger!" + other.name);
                 }
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Debug log the collision information
+        if (collision.gameObject.tag == "Clamp")
+        {
+           this.clampStatus = ClampStatus.collidePlayer;
+           LogController.Instance.debug($"Collision with: {collision.gameObject.name}");
         }
     }
 
