@@ -25520,12 +25520,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1. Hold down the arrow to move forward.
+  m_text: '1. Press "arrow" to stop clamp rotation;
 
-    2. Releasing stops movement.
+    2. Clamp will then extend
+    to the direction.
 
-    3.
-    Wrong answer will move back to starting position.'
+    3. Press at the right time to collect the right word.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: efef8b91b300fa84f9a50e1ac422f2d8, type: 2}
   m_sharedMaterial: {fileID: 985774332121155581, guid: efef8b91b300fa84f9a50e1ac422f2d8, type: 2}
@@ -25552,7 +25552,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.65
+  m_fontSize: 29.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
