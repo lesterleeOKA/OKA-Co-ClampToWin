@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efceae9bae9608d4bb01331ccc0dbf34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aeea506c399252429811e4b77512dbe, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4523,7 +4523,6 @@ MonoBehaviour:
   maxRotation: 30
   minRotation: -40
   barCollider: {fileID: 639109425}
-  audioSource: {fileID: 0}
 --- !u!225 &386613334
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -6899,7 +6898,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efceae9bae9608d4bb01331ccc0dbf34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aeea506c399252429811e4b77512dbe, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8918,7 +8917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efceae9bae9608d4bb01331ccc0dbf34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aeea506c399252429811e4b77512dbe, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11677,7 +11676,6 @@ MonoBehaviour:
   maxRotation: 40
   minRotation: -30
   barCollider: {fileID: 1435531732}
-  audioSource: {fileID: 0}
 --- !u!223 &826718981
 Canvas:
   m_ObjectHideFlags: 0
@@ -13913,7 +13911,6 @@ MonoBehaviour:
   maxRotation: 40
   minRotation: -40
   barCollider: {fileID: 15275309}
-  audioSource: {fileID: 0}
 --- !u!223 &954611740
 Canvas:
   m_ObjectHideFlags: 0
@@ -18294,7 +18291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 90ab1338a7be9254d95f754f43fb40b0, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1b4f7905fb71dac49a95968e2ae92588, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -19407,7 +19404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efceae9bae9608d4bb01331ccc0dbf34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aeea506c399252429811e4b77512dbe, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24885,7 +24882,7 @@ PrefabInstance:
     - target: {fileID: 1031422727965296244, guid: 0017e1a7dfbb96e4eb9744e32abb05b8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 642af20898b63b142a03296fb70b1eb8, type: 3}
+      objectReference: {fileID: 21300000, guid: cc9c53e6583509b4baca8b72ab2de249, type: 3}
     - target: {fileID: 1082641292870919625, guid: 0017e1a7dfbb96e4eb9744e32abb05b8, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -26647,7 +26644,6 @@ MonoBehaviour:
   maxRotation: 40
   minRotation: -40
   barCollider: {fileID: 532930284}
-  audioSource: {fileID: 0}
 --- !u!223 &1943719805
 Canvas:
   m_ObjectHideFlags: 0

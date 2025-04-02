@@ -9646,7 +9646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc0c8ceb45ae5bc4e8b0a09fd1749326, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9673,8 +9673,8 @@ MonoBehaviour:
   cell: {fileID: 0}
   answerBoxCg: {fileID: 450481499331825027}
   clampSprites:
-  - {fileID: 21300000, guid: 387c3b98b9a2c0e4e9dc096088635c42, type: 3}
-  - {fileID: 21300000, guid: 58b7229cc7c56f14186d027ed182060f, type: 3}
+  - {fileID: 21300000, guid: dc0c8ceb45ae5bc4e8b0a09fd1749326, type: 3}
+  - {fileID: 21300000, guid: 95adce7a36709a74186c7aec676cd9f8, type: 3}
 --- !u!50 &4939865393405634150
 Rigidbody2D:
   serializedVersion: 4
