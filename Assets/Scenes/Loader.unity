@@ -414,12 +414,14 @@ MonoBehaviour:
     gamePreview: {fileID: 0}
     instructions: {fileID: 0}
     gameTime: 300
-    playersClampSpeed: 0.5
-    playersRotationSpeed: 40
+    playersClampSpeed: 0.25
+    playersRotationSpeed: 30
     retry_times: 3
     objectAverageSpeed: 2
     showFPS: 0
     playerNumber: 4
+    clampOpenTexture: {fileID: 0}
+    clampClampedTexture: {fileID: 0}
   apiManager:
     jwt: 
     appId: 
@@ -448,8 +450,10 @@ MonoBehaviour:
       gameTime: 0
       playerNumber: 0
       grid_image: 
-      playersClampSpeed: 3
-      playersRotationSpeed: 200
+      clamp_open_image: 
+      clamp_clamped_image: 
+      clamp_extend_speed: 0.25
+      clamp_rotation_speed: 30
     maxRetries: 10
     debugLayer: {fileID: 1630735626}
     loginErrorBox: {fileID: 645755778}

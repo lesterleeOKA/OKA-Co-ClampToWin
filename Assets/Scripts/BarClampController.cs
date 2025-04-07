@@ -28,10 +28,12 @@ public class BarClampController : MonoBehaviour
     public BoxCollider2D barCollider;
     private AudioSource audioSource;
 
-    public void Init(float _fillSpeed=0.5f, float _rotationSpeed=50f)
+    public void Init(float _fillSpeed=0.5f, float _rotationSpeed=50f, Texture[] clampTextures=null)
     {
         this.fillSpeed = _fillSpeed;
         this.rotationSpeed = _rotationSpeed;
+        if (this.clamp != null && clampTextures != null) 
+            this.clamp.CongfigClampTexture(clampTextures);
         this.resetBarClamp();
         this.StartRotation();
         if (this.characterController != null)
@@ -59,6 +61,7 @@ public class BarClampController : MonoBehaviour
                 this.HandleRotatingState();
                 break;
             case BarClampStatus.extending:
+                if (this.clamp != null) this.clamp.ControlDottedLine(false);
                 this.HandleExtendingState();
                 break;
         }
@@ -128,7 +131,7 @@ public class BarClampController : MonoBehaviour
         this.isFilling = true;
         this.clamp.resetClamp();
         this.barClampStatus = BarClampStatus.rotating;
-        if(!this.playerController.IsTriggerToNextQuestion)
+        if (!this.playerController.IsTriggerToNextQuestion)
             this.characterController.TriggerActive(true);
     }
 

@@ -18,8 +18,9 @@ public class Clamp : MonoBehaviour
     public string answer;
     public Cell cell;
     public CanvasGroup answerBoxCg;
+    public CanvasGroup dottedLine;
     private TextMeshProUGUI answerBox = null;
-    public Sprite[] clampSprites;
+    public Texture[] clampTextures;
 
     private void Start()
     {
@@ -29,8 +30,24 @@ public class Clamp : MonoBehaviour
             SetUI.SetScale(this.answerBoxCg, false);
             this.answerBox = this.answerBoxCg.GetComponentInChildren<TextMeshProUGUI>();
         }
+        this.ControlDottedLine(true);
     }
 
+    public void CongfigClampTexture(Texture[] clamps=null)
+    {
+        if(clamps != null)
+        {
+            this.clampTextures = clamps;
+        }
+    }
+
+    public void ControlDottedLine(bool status)
+    {
+        if (this.dottedLine != null)
+        {
+            this.dottedLine.alpha = status ? 0.5f : 0f;
+        }
+    }
     private void FixedUpdate()
     {
         switch (this.clampStatus)
@@ -49,15 +66,16 @@ public class Clamp : MonoBehaviour
     public void resetClamp()
     {
         this.setAnswer(null);
+        this.ControlDottedLine(true);
         this.clampStatus = ClampStatus.open;
     }
 
     void setClampSprite(int id)
     {
-        var clampImg = this.transform.GetComponent<Image>();
+        var clampImg = this.transform.GetComponent<RawImage>();
         if(clampImg != null)
         {
-            clampImg.sprite = this.clampSprites[id];
+            clampImg.texture = this.clampTextures[id];
         }
     }
 

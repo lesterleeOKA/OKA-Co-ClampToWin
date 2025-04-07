@@ -140,7 +140,9 @@ public class GameSetting : MonoBehaviour
         {
             this.apiManager.settings.backgroundImageUrl,
             this.apiManager.settings.previewGameImageUrl,
-            this.apiManager.settings.grid_image
+            this.apiManager.settings.grid_image,
+            this.apiManager.settings.clamp_open_image,
+            this.apiManager.settings.clamp_clamped_image
         };
         imageUrls = imageUrls.Where(url => !string.IsNullOrEmpty(url)).ToList();
 
@@ -180,6 +182,14 @@ public class GameSetting : MonoBehaviour
             else if (url == this.apiManager.settings.grid_image)
             {
                 this.gameSetup.gridTexture = texture != null ? texture : null;
+            }
+            else if (url == this.apiManager.settings.clamp_open_image)
+            {
+                this.gameSetup.clampOpenTexture = texture != null ? texture : null;
+            }
+            else if (url == this.apiManager.settings.clamp_clamped_image)
+            {
+                this.gameSetup.clampClampedTexture = texture != null ? texture : null;
             }
         }
 
@@ -262,6 +272,10 @@ public class GameSetup : LoadImage
     public int objectAverageSpeed;
     public bool showFPS = false;
     public int playerNumber = 1;
+    [Tooltip("Default Clamp Open Texture")]
+    public Texture clampOpenTexture;
+    [Tooltip("Default Clamp Clamped Texture")]
+    public Texture clampClampedTexture;
 
     public void setBackground()
     {

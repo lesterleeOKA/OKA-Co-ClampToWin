@@ -6,8 +6,9 @@ public class GameSettings : Settings
 {
     public int playerNumber = 0;
     public string grid_image;
-    public float playersClampSpeed = 3f;
-    public float playersRotationSpeed = 200f;
+    public string clamp_open_image, clamp_clamped_image;
+    public float clamp_extend_speed = 0.25f;
+    public float clamp_rotation_speed = 30f;
 }
 
 public static class SetParams
@@ -20,19 +21,37 @@ public static class SetParams
             string grid_image = jsonNode["setting"]["grid_image"] != null ?
                 jsonNode["setting"]["grid_image"].ToString().Replace("\"", "") : null;
 
+            string _clamp_open_image = jsonNode["setting"]["clamp_open"] != null ?
+                jsonNode["setting"]["clamp_open"].ToString().Replace("\"", "") : null;
+
+            string _clamp_clamped_image = jsonNode["setting"]["clamp_clamped"] != null ?
+                jsonNode["setting"]["clamp_clamped"].ToString().Replace("\"", "") : null;
+
             settings.playerNumber = jsonNode["setting"]["player_number"] != null ? jsonNode["setting"]["player_number"] : 4;
-            settings.playersClampSpeed = jsonNode["setting"]["clamp_moving_speed"] != null ? jsonNode["setting"]["clamp_moving_speed"] : 3f;
-            settings.playersRotationSpeed = jsonNode["setting"]["rotation_speed"] != null ? jsonNode["setting"]["rotation_speed"] : 200f;
+            settings.clamp_extend_speed = jsonNode["setting"]["clamp_extend_speed"] != null ? jsonNode["setting"]["clamp_extend_speed"] : 0.25f;
+            settings.clamp_rotation_speed = jsonNode["setting"]["clamp_rotation_speed"] != null ? jsonNode["setting"]["clamp_rotation_speed"] : 30f;
 
             LoaderConfig.Instance.gameSetup.playerNumber = settings.playerNumber;
-            LoaderConfig.Instance.gameSetup.playersClampSpeed = settings.playersClampSpeed;
-            LoaderConfig.Instance.gameSetup.playersRotationSpeed = settings.playersRotationSpeed;
+            LoaderConfig.Instance.gameSetup.playersClampSpeed = settings.clamp_extend_speed;
+            LoaderConfig.Instance.gameSetup.playersRotationSpeed = settings.clamp_rotation_speed;
 
 
             if (grid_image != null)
             {
                 if (!grid_image.StartsWith("https://") || !grid_image.StartsWith(APIConstant.blobServerRelativePath))
                     settings.grid_image = APIConstant.blobServerRelativePath + grid_image;
+            }
+
+            if (_clamp_open_image != null)
+            {
+                if (!_clamp_open_image.StartsWith("https://") || !_clamp_open_image.StartsWith(APIConstant.blobServerRelativePath))
+                    settings.clamp_open_image = APIConstant.blobServerRelativePath + _clamp_open_image;
+            }
+
+            if (_clamp_clamped_image != null)
+            {
+                if (!_clamp_clamped_image.StartsWith("https://") || !_clamp_clamped_image.StartsWith(APIConstant.blobServerRelativePath))
+                    settings.clamp_clamped_image = APIConstant.blobServerRelativePath + _clamp_clamped_image;
             }
         }
     }

@@ -42,7 +42,17 @@ public class PlayerController : UserData
         {
             this.rotationSpeed = LoaderConfig.Instance.gameSetup.playersRotationSpeed;
         }
-    
+
+        Texture[] clampTextures = null;
+        if (LoaderConfig.Instance.gameSetup.clampOpenTexture != null && LoaderConfig.Instance.gameSetup.clampClampedTexture != null)
+        {
+            clampTextures = new Texture[]
+            {
+                LoaderConfig.Instance.gameSetup.clampOpenTexture,
+                LoaderConfig.Instance.gameSetup.clampClampedTexture
+            };
+        }
+
         this.countAtStartPoints = this.countGetAnswerAtStartPoints;
         this.updateRetryTimes(false);
         this.startPosition = startPos;
@@ -54,7 +64,7 @@ public class PlayerController : UserData
         if (this.characterButton == null)
         {
             this.characterButton = GameObject.FindGameObjectWithTag("P" + this.RealUserId + "-controller").GetComponent<CharacterController>();
-            this.characterButton.Init(this);
+            this.characterButton.Init(this, clampTextures);
         }
 
         if (this.PlayerIcons[0] == null)

@@ -18,7 +18,7 @@ public class CharacterController : MonoBehaviour
     public PlayerController playerController;
     public BarClampController barClampController;
 
-    public void Init(PlayerController _playerController)
+    public void Init(PlayerController _playerController, Texture[] clampTextures = null)
     {
         this.playerController = _playerController;
         // Add a pointer click event
@@ -27,7 +27,8 @@ public class CharacterController : MonoBehaviour
         //AddEventTrigger(eventTrigger, EventTriggerType.PointerUp, OnPointerUp);
         if(this.barClampController != null) 
             this.barClampController.Init(this.playerController.playersClampSpeed, 
-                                         this.playerController.rotationSpeed);
+                                         this.playerController.rotationSpeed,
+                                         clampTextures);
     }
 
     private void Update()
