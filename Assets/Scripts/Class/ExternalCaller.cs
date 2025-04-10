@@ -25,6 +25,7 @@ public static class ExternalCaller
 
     public static void BackToHomeUrlPage(bool isLogined = false)
     {
+
 #if !UNITY_EDITOR
         if (isLogined)
         {
@@ -45,8 +46,17 @@ public static class ExternalCaller
                 string baseUrl = GetCurrentDomainName;
                 string newUrl = $"https://{baseUrl}/RainbowOne/webapp/OKAGames/SelectGames/";
                 if (LogController.Instance != null) LogController.Instance.debug("full url:" + newUrl);
-                //Application.ExternalEval($"location.href = '{newUrl}', '_self'");
-                Application.ExternalEval($"window.location.replace('{newUrl}')");
+
+                string javascript = $@"
+                    if (window.self !== window.top) {{
+                        console.log('This page is inside an iframe');
+                        window.parent.postMessage('closeIframe', '*');
+                    }}
+                    else {{
+                        window.location.replace('{newUrl}');
+                    }}
+                ";
+                Application.ExternalEval(javascript);
             }
             else if (hostname.Contains("www.rainbowone.app"))
             {
