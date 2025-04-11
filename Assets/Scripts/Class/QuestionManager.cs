@@ -149,40 +149,36 @@ public class QuestionManager : MonoBehaviour
             string qid = qa.qid;
             string mediaUrl = qa.media != null && qa.media.Length > 0 ? APIConstant.blobServerRelativePath + qa.media[0] : "";
 
-            if (qa.answers != null)
-            {
-                if (qa.answers.Length > 0 && string.IsNullOrEmpty(qa.correctAnswer))
-                {
-                    qa.correctAnswer = qa.answers[qa.correctAnswerIndex];
-                }
-            }
-
             switch (qa.questionType)
             {
+                case "Text":
                 case "text":
                     ExternalCaller.UpdateLoadBarStatus("Loading Question");
                     this.loadedItems++;
                     if (this.loadedItems == this.totalItems) onComplete?.Invoke();
                     break;
+                case "Picture":
                 case "picture":
-                    if(string.IsNullOrEmpty(qa.correctAnswer) && !string.IsNullOrEmpty(qa.question))
-                        qa.correctAnswer = qa.question;
-
                     ExternalCaller.UpdateLoadBarStatus("Loading Images");
+
+                    if (string.IsNullOrEmpty(qa.correctAnswer) && !string.IsNullOrEmpty(qa.question))
+                        qa.correctAnswer = qa.question;
                     StartCoroutine(
-                       this.loadImage.Load(
-                           isLogined ? "" : folderName,
-                           isLogined ? mediaUrl : qid,
-                           tex =>
-                           {
-                               qa.texture = tex;
-                               this.loadedItems++;
-                               if (this.loadedItems == this.totalItems) onComplete?.Invoke();
-                           }
-                        )
-                     );
+                        this.loadImage.Load(
+                            isLogined ? "" : folderName,
+                            isLogined ? mediaUrl : qid,
+                            tex =>
+                            {
+                                qa.texture = tex;
+                                this.loadedItems++;
+                                if (this.loadedItems == this.totalItems) onComplete?.Invoke();
+                            }
+                         )
+                      );
                     break;
+                case "Audio":
                 case "audio":
+                case "FillInBlank":
                 case "fillInBlank":
                     ExternalCaller.UpdateLoadBarStatus("Loading Audio");
                     StartCoroutine(

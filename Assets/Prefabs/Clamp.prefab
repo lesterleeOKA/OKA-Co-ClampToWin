@@ -24348,7 +24348,7 @@ MonoBehaviour:
   lineColor: {r: 0.23137255, g: 0.12941177, b: 0.09019608, a: 1}
   dashLength: 20
   gapLength: 10
-  lineLength: 1500
+  lineLength: 350
   lineWidth: 4
   orientation: 1
 --- !u!223 &972587925359862058
@@ -24382,7 +24382,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2260764251487204374}
   m_Enabled: 1
-  m_Alpha: 0.5
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

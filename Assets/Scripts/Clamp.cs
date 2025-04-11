@@ -45,7 +45,7 @@ public class Clamp : MonoBehaviour
     {
         if (this.dottedLine != null)
         {
-            this.dottedLine.alpha = status ? 0.5f : 0f;
+            this.dottedLine.alpha = status ? 1f : 0f;
         }
     }
     private void FixedUpdate()

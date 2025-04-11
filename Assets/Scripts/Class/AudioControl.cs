@@ -59,5 +59,6 @@ public class AudioControl : MonoBehaviour
     void gameStatus(bool status)
     {
         Time.timeScale = status ? 0f : 1f;
+        GameController.Instance.showingPopup = status;
     }
 }
