@@ -6,7 +6,6 @@ public class AudioControl : MonoBehaviour
     public AudioOnOff audioOnOffPanel;
     public Image[] muteBtns;
     public Sprite[] audioSprites;
-    private AudioListener audioListener;
     // Start is called before the first frame update
     void Start()
     {

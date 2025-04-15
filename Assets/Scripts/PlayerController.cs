@@ -203,13 +203,14 @@ public class PlayerController : UserData
                         answeredPercentage = 100f;
                     }
 
+                    this.AnswerTime = currentTime + this.AnswerTime;
                     loader.SubmitAnswer(
                                currentTime,
                                this.Score,
                                answeredPercentage,
                                progress,
                                correctId,
-                               currentTime,
+                               this.AnswerTime,
                                currentQuestion.qa.qid,
                                currentQuestion.correctAnswerId,
                                this.CapitalizeFirstLetter(this.answer),

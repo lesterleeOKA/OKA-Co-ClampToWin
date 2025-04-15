@@ -21,6 +21,7 @@ public class UserData : MonoBehaviour
     private int retry = 0;
     [SerializeField]
     private int numberOfRetry = 3;
+    private float answerTime;
 
     public string UserName
     {
@@ -70,6 +71,11 @@ public class UserData : MonoBehaviour
         return this.correctAnswerPercentage;
     }
 
+    public float AnswerTime
+    {
+        get { return this.answerTime; }
+        set { this.answerTime = value; }
+    }
 
     public int Retry
     {

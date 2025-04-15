@@ -25,13 +25,21 @@ public static class ExternalCaller
 
     public static void BackToHomeUrlPage(bool isLogined = false)
     {
-
 #if !UNITY_EDITOR
         if (isLogined)
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
-                Application.ExternalEval("history.back();");
+                string javascript = $@"
+                    if (window.self !== window.top) {{
+                        console.log('This page is inside an iframe');
+                        window.parent.postMessage({{ action: 'exit' }}, '*');
+                    }}
+                    else {{
+                        history.back();
+                    }}
+                ";
+                Application.ExternalEval(javascript);
             }
             else
             {
